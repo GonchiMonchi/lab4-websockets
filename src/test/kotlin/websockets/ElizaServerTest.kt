@@ -37,12 +37,11 @@ class ElizaServerTest {
         assertEquals("The doctor is in.", list[0])
     }
 
-    //@Disabled
+    // @Disabled
     @Test
     fun onChat() {
         val latch = CountDownLatch(4)
         val list = mutableListOf<String>()
-
         val client = ElizaOnOpenMessageHandlerToComplete(list, latch)
         container.connectToServer(client, URI("ws://localhost:$port/eliza"))
         latch.await()
