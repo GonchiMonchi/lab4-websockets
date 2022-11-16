@@ -4,7 +4,7 @@ package websockets
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Disabled
+// import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.*
@@ -46,8 +46,8 @@ class ElizaServerTest {
         val client = ElizaOnOpenMessageHandlerToComplete(list, latch)
         container.connectToServer(client, URI("ws://localhost:$port/eliza"))
         latch.await()
-        assertTrue(list.size >= 4) //No sabemos si son 4 o más mensajes
-        assertEquals("Please don't apologize.", list[3]) //Pero si que el 4 debería ser el nuestro
+        assertTrue(list.size >= 4) // No sabemos si son 4 o más mensajes
+        assertEquals("Please don't apologize.", list[3]) // Pero si que el 4 debería ser el nuestro
     }
 }
 
@@ -67,7 +67,7 @@ class ElizaOnOpenMessageHandlerToComplete(private val list: MutableList<String>,
     fun onMessage(message: String, session: Session) {
         list.add(message)
         latch.countDown()
-        if (list.size == 3) { //El 4º mensaje es el nuestro
+        if (list.size == 3) { // El 4º mensaje es el nuestro
             session.basicRemote.sendText("sorry")
         }
     }
